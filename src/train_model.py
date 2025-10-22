@@ -205,9 +205,9 @@ early_stopping = callbacks.EarlyStopping(
     verbose=1
 )
 
-# Model checkpointing
+# Model checkpointing (Keras 3: full model must end with .keras)
 model_checkpoint = callbacks.ModelCheckpoint(
-    'models/best_model.h5',
+    'models/best_model.keras',
     monitor='val_accuracy',
     save_best_only=True,
     save_weights_only=False,
@@ -286,20 +286,20 @@ print("Training curves saved to results/training_curves.png")
 # --- 7. Model Evaluation ---
 print("\n--- 7. Model Evaluation ---")
 
-# Load best model weights
-model.load_weights('models/best_model.h5')
-print("Best model weights loaded for evaluation")
+# Load best model (full model saved as .keras)
+best_model = tf.keras.models.load_model('models/best_model.keras')
+print("Best full model loaded for evaluation")
 
 # Evaluate on validation and test sets
-val_loss, val_accuracy = model.evaluate(X_val, y_val, verbose=0)
-test_loss, test_accuracy = model.evaluate(X_test, y_test, verbose=0)
+val_loss, val_accuracy = best_model.evaluate(X_val, y_val, verbose=0)
+test_loss, test_accuracy = best_model.evaluate(X_test, y_test, verbose=0)
 
 print(f"Validation - Loss: {val_loss:.4f}, Accuracy: {val_accuracy:.4f}")
 print(f"Test - Loss: {test_loss:.4f}, Accuracy: {test_accuracy:.4f}")
 
 # Get predictions
-y_val_pred = model.predict(X_val, verbose=0)
-y_test_pred = model.predict(X_test, verbose=0)
+y_val_pred = best_model.predict(X_val, verbose=0)
+y_test_pred = best_model.predict(X_test, verbose=0)
 
 # Convert predictions to class labels
 y_val_pred_classes = np.argmax(y_val_pred, axis=1)
@@ -424,22 +424,12 @@ for idx in sample_indices:
 with open('results/sample_predictions.json', 'w') as f:
     json.dump(sample_predictions, f, indent=2, ensure_ascii=False)
 
-# Display sample predictions
-print("Sample Predictions (10 random test samples):")
-for i, pred in enumerate(sample_predictions[:5]):  # Show first 5
-    status = "✓ CORRECT" if pred['correct_prediction'] else "✗ WRONG"
-    print(f"\nSample {i+1} - {status}")
-    print(f"True Label: {pred['true_label']} | Predicted: {pred['predicted_label']} | Confidence: {pred['prediction_confidence']:.3f}")
-    print(f"Text: {pred['cleaned_text']}")
-
-print("\nSample predictions saved to results/sample_predictions.json")
-
 # --- 10. Save Final Model ---
 print("\n--- 10. Saving Final Model ---")
 
-# Save complete model
-model.save('models/lstm_transformer_sentiment_model.h5')
-print("Complete model saved to models/lstm_transformer_sentiment_model.h5")
+# Save complete final model in Keras format
+model.save('models/lstm_transformer_sentiment_model.keras')
+print("Complete model saved to models/lstm_transformer_sentiment_model.keras")
 
 # Save model architecture as JSON
 model_json = model.to_json()
@@ -455,7 +445,7 @@ print("="*60)
 print(f"Final Test Accuracy: {test_accuracy:.4f}")
 print(f"Final Test F1-Score (Macro): {test_report['macro avg']['f1-score']:.4f}")
 print(f"Training Duration: {training_duration}")
-print(f"Model saved to: models/lstm_transformer_sentiment_model.h5")
+print(f"Model saved to: models/lstm_transformer_sentiment_model.keras")
 print(f"Results saved to: results/ directory")
 print("="*60)
 
