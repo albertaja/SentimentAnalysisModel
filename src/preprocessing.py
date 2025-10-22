@@ -32,7 +32,9 @@ os.makedirs('data/processed', exist_ok=True)
 
 # --- 1. Load and Inspect the Dataset ---
 print("\n--- 1. Loading and Inspecting Dataset ---")
-df = pd.read_csv('data/raw/Ulasan My XL 1000 Data Labelled.csv')
+# Use absolute path as requested
+csv_path = "/Users/albertrafael/PycharmProjects/SentimentAnalysisModel/data/raw/Ulasan My XL 1000 Data Labelled.csv"
+df = pd.read_csv(csv_path)
 print("Dataset Info:")
 df.info()
 print("\nSample Rows:")
@@ -136,7 +138,8 @@ print(f"Label mapping: {dict(zip(label_encoder.classes_, label_encoder.transform
 # --- 5. Train/Validation/Test Split ---
 print("\n--- 5. Splitting Data ---")
 X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
-X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_test=42, stratify=y_temp)
+# FIX: use correct parameter random_state instead of random_test
+X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42, stratify=y_temp)
 print("Data splitting complete.")
 
 # --- 6. Quality Assurance Assertions ---
