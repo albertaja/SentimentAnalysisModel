@@ -66,7 +66,7 @@ unique, counts = np.unique(y_train, return_counts=True)
 print(f"Training class distribution: {dict(zip(unique, counts))}")
 
 # Sample content
-print(f"\nSample preprocessed text (first 3 reviews):")
+print("\nSample preprocessed text (first 3 reviews):")
 for i in range(3):
     print(f"Review {i+1}: {cleaned_df['cleaned_ulasan'].iloc[i][:100]}...")
     print(f"Sentiment: {cleaned_df['Sentimen'].iloc[i]} -> Encoded: {y_train[i]}")
@@ -75,7 +75,7 @@ for i in range(3):
 print("\n--- 2. Building LSTM + Transformer Hybrid Model ---")
 
 class TransformerBlock(layers.Layer):
-    \"\"\"Custom Transformer Encoder Block\"\"\"
+    """Custom Transformer Encoder Block"""
     def __init__(self, embed_dim, num_heads, ff_dim, rate=0.1):
         super(TransformerBlock, self).__init__()
         self.att = layers.MultiHeadAttention(num_heads=num_heads, key_dim=embed_dim)
@@ -98,7 +98,7 @@ class TransformerBlock(layers.Layer):
 
 def create_lstm_transformer_model(vocab_size, max_length, embed_dim=128, lstm_units=64, 
                                  num_heads=4, ff_dim=128, num_classes=3):
-    \"\"\"Create LSTM + Transformer Hybrid Model\"\"\"
+    """Create LSTM + Transformer Hybrid Model"""
     
     # Input layer
     inputs = layers.Input(shape=(max_length,))
@@ -173,8 +173,8 @@ BATCH_SIZE = 32
 EPOCHS = 30
 PATIENCE = 5
 
-print(f"Optimizer: Adam")
-print(f"Loss function: sparse_categorical_crossentropy")
+print("Optimizer: Adam")
+print("Loss function: sparse_categorical_crossentropy")
 print(f"Batch size: {BATCH_SIZE}")
 print(f"Max epochs: {EPOCHS}")
 print(f"Early stopping patience: {PATIENCE}")
@@ -417,7 +417,7 @@ for i, pred in enumerate(sample_predictions[:5]):  # Show first 5
     print(f"True Label: {pred['true_label']} | Predicted: {pred['predicted_label']} | Confidence: {pred['prediction_confidence']:.3f}")
     print(f"Text: {pred['cleaned_text']}")
 
-print(f"\nSample predictions saved to results/sample_predictions.json")
+print("\nSample predictions saved to results/sample_predictions.json")
 
 # --- 10. Save Final Model ---
 print("\n--- 10. Saving Final Model ---")
