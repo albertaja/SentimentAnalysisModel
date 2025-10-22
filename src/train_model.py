@@ -76,8 +76,12 @@ print("\n--- 2. Building LSTM + Transformer Hybrid Model ---")
 
 class TransformerBlock(layers.Layer):
     """Custom Transformer Encoder Block"""
-    def __init__(self, embed_dim, num_heads, ff_dim, rate=0.1):
-        super(TransformerBlock, self).__init__()
+    def __init__(self, embed_dim, num_heads, ff_dim, rate=0.1, **kwargs):
+        super().__init__(**kwargs)
+        self.embed_dim = embed_dim
+        self.num_heads = num_heads
+        self.ff_dim = ff_dim
+        self.dropout_rate = rate
         self.att = layers.MultiHeadAttention(num_heads=num_heads, key_dim=embed_dim)
         self.ffn = keras.Sequential([
             layers.Dense(ff_dim, activation="relu"),
@@ -88,13 +92,23 @@ class TransformerBlock(layers.Layer):
         self.dropout1 = layers.Dropout(rate)
         self.dropout2 = layers.Dropout(rate)
 
-    def call(self, inputs, training):
-        attn_output = self.att(inputs, inputs)
+    def call(self, inputs, training=None):
+        attn_output = self.att(inputs, inputs, training=training)
         attn_output = self.dropout1(attn_output, training=training)
         out1 = self.layernorm1(inputs + attn_output)
-        ffn_output = self.ffn(out1)
+        ffn_output = self.ffn(out1, training=training)
         ffn_output = self.dropout2(ffn_output, training=training)
         return self.layernorm2(out1 + ffn_output)
+
+    def get_config(self):
+        config = super().get_config()
+        config.update({
+            'embed_dim': self.embed_dim,
+            'num_heads': self.num_heads,
+            'ff_dim': self.ff_dim,
+            'rate': self.dropout_rate,
+        })
+        return config
 
 def create_lstm_transformer_model(vocab_size, max_length, embed_dim=128, lstm_units=64, 
                                  num_heads=4, ff_dim=128, num_classes=3):
@@ -106,13 +120,14 @@ def create_lstm_transformer_model(vocab_size, max_length, embed_dim=128, lstm_un
     # Embedding layer
     embedding = layers.Embedding(vocab_size, embed_dim, mask_zero=True)(inputs)
     
-    # Bidirectional LSTM layer
+    # Bidirectional LSTM layer (outputs sequence)
     lstm_out = layers.Bidirectional(
         layers.LSTM(lstm_units, return_sequences=True, dropout=0.3, recurrent_dropout=0.3)
     )(embedding)
     
-    # Transformer encoder block
-    transformer_out = TransformerBlock(embed_dim*2, num_heads, ff_dim)(lstm_out)
+    # Transformer encoder block expects features dimension = embedding of BiLSTM (2*lstm_units)
+    proj = layers.Dense(embed_dim * 2)(lstm_out)
+    transformer_out = TransformerBlock(embed_dim*2, num_heads, ff_dim)(proj)
     
     # Global average pooling to reduce sequence dimension
     pooled = layers.GlobalAveragePooling1D()(transformer_out)
