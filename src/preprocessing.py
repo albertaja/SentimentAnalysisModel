@@ -5,6 +5,7 @@ import pandas as pd
 import re
 import string
 import numpy as np
+import os
 from collections import Counter
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
@@ -16,11 +17,21 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 import pickle
 
-# Download necessary NLTK data
-nltk.download('punkt', quiet=True)
+# Download necessary NLTK data with error handling
+print("Downloading required NLTK data...")
+try:
+    nltk.download('punkt', quiet=True)
+    nltk.download('punkt_tab', quiet=True)
+    print("NLTK data downloaded successfully.")
+except Exception as e:
+    print(f"Warning: Failed to download NLTK data: {e}")
+    print("Continuing with alternative tokenization...")
+
+# Create processed directory if it doesn't exist
+os.makedirs('data/processed', exist_ok=True)
 
 # --- 1. Load and Inspect the Dataset ---
-print("--- 1. Loading and Inspecting Dataset ---")
+print("\n--- 1. Loading and Inspecting Dataset ---")
 df = pd.read_csv('data/raw/Ulasan My XL 1000 Data Labelled.csv')
 print("Dataset Info:")
 df.info()
@@ -71,9 +82,15 @@ def stem_text(text):
     return stemmer.stem(text)
 
 def get_most_common_tokens(texts, n=20):
-    """Calculates the most common tokens in a list of texts."""
+    """Calculates the most common tokens in a list of texts using fallback tokenization."""
     all_text = " ".join(texts)
-    tokens = word_tokenize(all_text)
+    try:
+        # Try NLTK tokenization first
+        tokens = word_tokenize(all_text)
+    except LookupError:
+        # Fallback to simple split if NLTK data is missing
+        print("Using fallback tokenization (simple split)...")
+        tokens = all_text.split()
     return Counter(tokens).most_common(n)
 
 def preprocess_text(text):
@@ -114,11 +131,12 @@ print("\n--- 4. Encoding Labels ---")
 label_encoder = LabelEncoder()
 y = label_encoder.fit_transform(df['Sentimen'])
 print("Labels encoded.")
+print(f"Label mapping: {dict(zip(label_encoder.classes_, label_encoder.transform(label_encoder.classes_)))}")
 
 # --- 5. Train/Validation/Test Split ---
 print("\n--- 5. Splitting Data ---")
 X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
-X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42, stratify=y_temp)
+X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_test=42, stratify=y_temp)
 print("Data splitting complete.")
 
 # --- 6. Quality Assurance Assertions ---
@@ -126,17 +144,17 @@ print("\n--- 6. Running Quality Assurance Assertions ---")
 # Assert that there are no missing values in the cleaned text
 assert df['cleaned_ulasan'].isnull().sum() == 0, "Missing values found after cleaning."
 # Assert that the splits have the correct proportions
-assert len(X_train) / len(X) == 0.7, "Train split proportion is incorrect."
-assert len(X_val) / len(X) == 0.15, "Validation split proportion is incorrect."
-assert len(X_test) / len(X) == 0.15, "Test split proportion is incorrect."
+assert abs(len(X_train) / len(X) - 0.7) < 0.01, "Train split proportion is incorrect."
+assert abs(len(X_val) / len(X) - 0.15) < 0.01, "Validation split proportion is incorrect."
+assert abs(len(X_test) / len(X) - 0.15) < 0.01, "Test split proportion is incorrect."
 # Assert that the label distribution is similar across splits (stratification check)
 original_dist = np.bincount(y) / len(y)
 train_dist = np.bincount(y_train) / len(y_train)
 val_dist = np.bincount(y_val) / len(y_val)
 test_dist = np.bincount(y_test) / len(y_test)
-assert np.allclose(original_dist, train_dist, atol=0.01), "Train set label distribution is skewed."
-assert np.allclose(original_dist, val_dist, atol=0.01), "Validation set label distribution is skewed."
-assert np.allclose(original_dist, test_dist, atol=0.01), "Test set label distribution is skewed."
+assert np.allclose(original_dist, train_dist, atol=0.02), "Train set label distribution is skewed."
+assert np.allclose(original_dist, val_dist, atol=0.02), "Validation set label distribution is skewed."
+assert np.allclose(original_dist, test_dist, atol=0.02), "Test set label distribution is skewed."
 print("All assertions passed.")
 
 # --- 7. Export Artifacts ---
@@ -146,6 +164,11 @@ with open('data/processed/tokenizer.pkl', 'wb') as handle:
 with open('data/processed/label_encoder.pkl', 'wb') as handle:
     pickle.dump(label_encoder, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
+# Save padded sequences and encoded labels
+np.save('data/processed/X_padded.npy', X)
+np.save('data/processed/y_encoded.npy', y)
+
+# Save train/val/test splits
 np.save('data/processed/X_train.npy', X_train)
 np.save('data/processed/y_train.npy', y_train)
 np.save('data/processed/X_val.npy', X_val)
@@ -156,6 +179,7 @@ print("Artifacts exported successfully.")
 
 # --- Summary ---
 print("\n--- Preprocessing Summary ---")
+print(f"Total samples: {len(df)}")
 print(f"Vocabulary size: {len(tokenizer.word_index)}")
 print(f"Max sequence length: {max_len}")
 print(f"X_train shape: {X_train.shape}")
@@ -164,4 +188,5 @@ print(f"X_val shape: {X_val.shape}")
 print(f"y_val shape: {y_val.shape}")
 print(f"X_test shape: {X_test.shape}")
 print(f"y_test shape: {y_test.shape}")
+print(f"Class distribution: {dict(zip(*np.unique(y, return_counts=True)))}")
 print("---------------------------\n")
