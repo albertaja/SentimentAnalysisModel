@@ -74,7 +74,10 @@ for i in range(3):
 # --- 2. Model Architecture: LSTM + Transformer Hybrid ---
 print("\n--- 2. Building LSTM + Transformer Hybrid Model ---")
 
-@keras.saving.register_keras_serializable(package="Custom", name="TransformerBlock")
+# Use TF-Keras registration API (compatible with TF 2.18)
+from tensorflow.keras.saving import register_keras_serializable
+
+@register_keras_serializable(package="Custom", name="TransformerBlock")
 class TransformerBlock(layers.Layer):
     """Custom Transformer Encoder Block"""
     def __init__(self, embed_dim, num_heads, ff_dim, rate=0.1, **kwargs):
