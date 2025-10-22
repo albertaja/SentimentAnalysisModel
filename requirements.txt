@@ -1,0 +1,6 @@
+pandas
+numpy
+sastrawi
+scikit-learn
+tensorflow
+nltk
