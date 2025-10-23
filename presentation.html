@@ -1,470 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aruna Initiatives Presentation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #007aff;
-            --background-light: #f5f5f7;
-            --background-dark: #1d1d1f;
-            --text-light: #f5f5f7;
-            --text-dark: #1d1d1f;
-            --card-background: #ffffff;
-            --shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Aruna Initiatives — YEH 2025 (Comprehensive)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#0f172a; --muted:#475569; --ring:#e6eaf0; --card:#ffffff; --bg:#f6f7fb;
+      --blue:#2563eb; --indigo:#6366f1; --purple:#8b5cf6; --cyan:#06b6d4; --emerald:#10b981; --amber:#f59e0b; --rose:#f43f5e;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color:var(--ink); background:
+      radial-gradient(1200px 1200px at 10% 10%, #eef2ff 0%, transparent 60%),
+      radial-gradient(900px 900px at 90% 0%, #ecfeff 0%, transparent 60%),
+      radial-gradient(1000px 800px at 70% 100%, #fff7ed 0%, transparent 65%), var(--bg)}
+    main{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; height:100vh; width:100vw; scrollbar-width:none; -ms-overflow-style:none}
+    main::-webkit-scrollbar{display:none}
+    section{flex:0 0 100vw; height:100vh; scroll-snap-align:start; display:flex; align-items:center; justify-content:center; padding:3.2rem; position:relative}
+    .container{width:100%; max-width:1250px}
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--background-light);
-            color: var(--text-dark);
-            margin: 0;
-            scroll-behavior: smooth;
-        }
+    .card{background:rgba(255,255,255,0.9); backdrop-filter:saturate(140%) blur(6px); border:1px solid var(--ring); border-radius:22px; padding:1.6rem 2rem; box-shadow:0 14px 44px rgba(2,6,23,.08)}
+    .grid{display:grid; gap:1.1rem}
+    .g-2{grid-template-columns:1.1fr .9fr}
+    .g-3{grid-template-columns:repeat(3,1fr)}
+    .g-4{grid-template-columns:repeat(4,1fr)}
 
-        main {
-            display: flex;
-            overflow-x: scroll;
-            scroll-snap-type: x mandatory;
-            height: 100vh;
-            width: 100vw;
-        }
+    h1{font-size:3.1rem; line-height:1.1; letter-spacing:-.02em; margin:0 0 .6rem 0; font-weight:800}
+    h2{font-size:2.1rem; line-height:1.15; letter-spacing:-.01em; margin:0 0 .9rem 0; font-weight:800}
+    h3{font-size:1.05rem; margin:0 0 .3rem 0; font-weight:800}
+    p{font-size:1.05rem; line-height:1.6; color:var(--muted); margin:0}
+    .sub{color:#334155}
 
-        section {
-            flex: 0 0 100vw;
-            height: 100vh;
-            scroll-snap-align: start;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 5rem;
-            box-sizing: border-box;
-            position: relative;
-        }
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; font-weight:700; font-size:.9rem; color:#0f172a; background:#eef2ff; border:1px solid #dbe3ff}
+    .pill{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:10px; padding:10px 12px; border-radius:12px; border:1px solid var(--ring); background:#f8fafc}
+    .pill .v{font-size:1.2rem; font-weight:800}
+    .pill .t{font-size:.88rem; color:#64748b}
+    .metric{background:var(--card); border:1px solid var(--ring); border-radius:14px; padding:.9rem}
+    .metric .big{font-weight:800; font-size:1.45rem}
+    .metric .cap{font-size:.9rem; color:#64748b}
 
-        .card {
-            background-color: var(--card-background);
-            border-radius: 30px;
-            box-shadow: var(--shadow);
-            padding: 3rem 4rem;
-            margin: 1rem;
-            max-width: 1100px;
-            width: 100%;
-            text-align: left;
-            border: 1px solid rgba(0,0,0,0.08);
-        }
+    .list{display:grid; gap:.45rem; margin-top:.5rem}
+    .li{display:flex; gap:.6rem}
+    .dot{width:9px; height:9px; border-radius:999px; margin-top:.5rem}
 
-        h1, h2, h3 {
-            font-weight: 900;
-            margin-bottom: 1em;
-            letter-spacing: -0.02em;
-        }
+    .c-blue{color:var(--blue)} .c-emerald{color:var(--emerald)} .c-indigo{color:var(--indigo)} .c-purple{color:var(--purple)} .c-amber{color:var(--amber)} .c-rose{color:var(--rose)} .c-cyan{color:var(--cyan)}
 
-        h1 {
-            font-size: 4.5rem;
-            color: #000;
-        }
+    .nav{position:fixed; bottom:20px; right:20px; display:flex; gap:10px}
+    .btn{background:#0f172a; color:#fff; border:none; border-radius:999px; padding:10px 16px; font-weight:700; cursor:pointer}
+    .badge{position:fixed; bottom:20px; left:20px; background:#e2e8f0; color:#0f172a; border-radius:999px; padding:8px 12px; font-weight:700}
 
-        h2 {
-            font-size: 3rem;
-            color: var(--text-dark);
-            text-align: center;
-            margin-bottom: 1.5em;
-        }
-
-        h2 .highlight {
-            color: var(--primary-color);
-        }
-
-        p {
-            font-size: 1.25rem;
-            line-height: 1.7;
-            color: #333;
-        }
-
-        ul {
-            list-style-position: outside;
-            padding-left: 1.5rem;
-        }
-
-        li {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        strong {
-            font-weight: 700;
-        }
-
-        .tagline {
-            font-size: 1.75rem;
-            font-weight: 400;
-            color: #555;
-            margin-top: 1rem;
-        }
-
-        .navigation {
-            position: fixed;
-            bottom: 2.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 1rem;
-            z-index: 100;
-        }
-
-        .nav-button {
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-button:hover {
-            background-color: rgba(0, 0, 0, 0.9);
-            transform: translateY(-3px);
-        }
-
-        #progress-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            height: 8px;
-            background-color: var(--primary-color);
-            width: 0%;
-            transition: width 0.2s ease-out;
-            z-index: 100;
-        }
-
-        /* Layout Helpers */
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* Slide Specifics */
-        #slide-1 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            text-align: center;
-        }
-
-        #slide-1 h1, #slide-1 p {
-            color: var(--text-light);
-            text-shadow: 0 4px 10px rgba(0,0,0,0.25);
-        }
-
-        #slide-9 {
-             background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
-        }
-
-        .kpi-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            width: 100%;
-        }
-
-        .kpi-card {
-            background: #fdfdff;
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .kpi-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .kpi-card .value {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--primary-color);
-            letter-spacing: -0.03em;
-        }
-
-        .kpi-card .label {
-            font-size: 1.1rem;
-            color: #444;
-            margin-top: 0.75rem;
-            font-weight: 700;
-        }
-
-        .placeholder {
-            background-color: #e9ecef;
-            border-radius: 15px;
-            padding: 4rem;
-            text-align: center;
-            color: #6c757d;
-            font-weight: 700;
-            border: 2px dashed #ced4da;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 2rem;
-        }
-
-        th, td {
-            padding: 1.25rem;
-            text-align: left;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        th {
-            background-color: #f8f9fa;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-    </style>
+    @media (max-width: 1100px){ .g-2{grid-template-columns:1fr} .g-3{grid-template-columns:1fr} .g-4{grid-template-columns:1fr 1fr} h1{font-size:2.4rem} h2{font-size:1.85rem} }
+  </style>
 </head>
 <body>
-    <main>
-        <section id="slide-1">
-            <div class="card" style="text-align: center;">
-                <h1>The Aruna Initiatives</h1>
-                <p class="tagline">A Bankable Framework for Community-Based Electrification and Accelerating Indonesia's Blue Economy</p>
-                <p style="margin-top: 3rem; font-size: 1.25rem;"><strong>Presenters:</strong> Albert Rafael & Moch. Arizal, Universitas Airlangga</p>
+  <main>
+    <!-- 0. Cover -->
+    <section id="s0">
+      <div class="container">
+        <div class="grid g-2" style="align-items:center">
+          <div class="card">
+            <span class="chip">Youth Energy Hackathon 2025</span>
+            <h1>The Aruna Initiatives</h1>
+            <p class="sub">A bankable dual-entity blueprint to de-risk community electrification and accelerate Indonesia’s blue economy</p>
+            <div class="grid g-4" style="margin-top:12px">
+              <div class="metric"><div class="big c-blue">2 MWp</div><div class="cap">Floating PV</div></div>
+              <div class="metric"><div class="big c-indigo">900 kW</div><div class="cap">Electrolyzer</div></div>
+              <div class="metric"><div class="big c-emerald">176 kW</div><div class="cap">Fuel Cell</div></div>
+              <div class="metric"><div class="big c-purple">800 m³/d</div><div class="cap">SWRO</div></div>
             </div>
-        </section>
-        <section id="slide-2">
-            <div class="card">
-                <h2 class="text-center">The <span class="highlight">Challenge</span> is Immense. The <span class="highlight">Opportunity</span> is Greater.</h2>
-                <div class="two-column">
-                    <div>
-                        <h3>The Diesel Dependency Crisis</h3>
-                        <p>Over 2,100 sites in Indonesia rely on diesel generators, creating a massive financial and environmental burden.</p>
-                        <ul>
-                            <li><strong>High Costs:</strong> Electricity costs soar to <strong>IDR 3,000-50,000/kWh</strong>, up to 30x the national average.</li>
-                            <li><strong>Carbon Intensive:</strong> Emits roughly <strong>3 MtCO₂ annually</strong>, undermining climate goals.</li>
-                            <li><strong>Vulnerable Supply Chains:</strong> Remote islands like Gili Ketapang face constant disruptions.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Gili Ketapang: A Microcosm of Opportunity</h3>
-                        <p>This densely populated island is a prime candidate for a renewable transformation, supported by government initiatives.</p>
-                        <ul>
-                            <li><strong>High Solar Irradiation:</strong> >4.9 kWh/m²/day, perfect for PV systems.</li>
-                            <li><strong>Govt. Support:</strong> Aligns with the "dedieselisasi" program and PLN's green roadmap.</li>
-                            <li><strong>Urgent Need:</strong> Unreliable power and water threaten livelihoods in fishing and tourism.</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="list">
+              <div class="li"><span class="dot" style="background:#2563eb"></span><p>Contracts: PPA (PLN), BLT (PDAM), IaaS (H₂) with performance-based O&M</p></div>
+              <div class="li"><span class="dot" style="background:#8b5cf6"></span><p>Ownership & handover: BLT/IaaS models ensure oversight and risk transfer</p></div>
+              <div class="li"><span class="dot" style="background:#06b6d4"></span><p>Community: women-led cooperatives for distribution and governance</p></div>
             </div>
-        </section>
-        <section id="slide-3">
-            <div class="card">
-                <h2 class="text-center">Our Solution: A <span class="highlight">Dual-Entity IPP Framework</span></h2>
-                 <p class="text-center" style="max-width: 800px; margin: 0 auto 3rem auto;">We designed a bankable, socio-commercial architecture that de-risks investment, aligns stakeholders, and empowers the local community through two specialized entities.</p>
-                <div class="two-column">
-                    <div class="kpi-card">
-                         <h3 style="color: var(--primary-color);">1. Renewable & Hydrogen Co. (RHC)</h3>
-                         <p>An Independent Power Producer (IPP) focused on clean energy generation and storage infrastructure.</p>
-                         <ul>
-                             <li><strong>Model:</strong> Sells electricity to PLN via a long-term Power Purchase Agreement (PPA).</li>
-                              <li><strong>Technology:</strong> Floating PV for power, with Green Hydrogen infrastructure leased via an Infrastructure-as-a-Service (IaaS) contract.</li>
-                         </ul>
-                    </div>
-                    <div class="kpi-card">
-                        <h3 style="color: var(--primary-color);">2. Flexible Water Co. (FWC)</h3>
-                        <p>A specialized utility to provide clean, affordable water for industrial and community needs.</p>
-                        <ul>
-                            <li><strong>Model:</strong> Develops modular desalination plants and sells water to the local utility (PDAM) under a Build-Lease-Transfer (BLT) agreement.</li>
-                            <li><strong>Innovation:</strong> Integrates Waste Heat Recovery (WHR) from the hydrogen process to boost efficiency.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="slide-4">
-            <div class="card">
-                 <h2 class="text-center">The <span class="highlight">Integrated Technical Architecture</span></h2>
-                 <div class="two-column">
-                    <div>
-                        <h3>System Components</h3>
-                        <ul>
-                            <li><strong>Floating Solar (FPV):</strong> A <strong>2,000 kWp</strong> system generating over 3.7 GWh annually.</li>
-                            <li><strong>Electrolyzer:</strong> A <strong>900 kW</strong> unit to produce <strong>~45,000 kg</strong> of Green Hydrogen per year.</li>
-                            <li><strong>H₂ Fuel Cell (HFCG):</strong> <strong>176 kW</strong> capacity to cover over <strong>58%</strong> of nighttime electricity demand.</li>
-                            <li><strong>Desalination (SWRO):</strong> A modular <strong>800 m³/day</strong> plant, enhanced by waste heat recovery.</li>
-                        </ul>
-                    </div>
-                    <div class="placeholder">
-                        <p>PLACEHOLDER FOR<br>PROCESS ENGINEERING DIAGRAM (PID)</p>
-                    </div>
-                 </div>
-            </div>
-        </section>
-        <section id="slide-5">
-            <div class="card">
-                <h2 class="text-center">Projected <span class="highlight">High-Impact Outcomes</span></h2>
-                <p class="text-center" style="max-width: 800px; margin: 0 auto 3rem auto;">This integrated system delivers significant, measurable benefits across environmental, economic, and social dimensions, creating a replicable model for sustainable island development.</p>
-                <div class="kpi-container">
-                    <div class="kpi-card">
-                        <div class="value">4,365</div>
-                        <div class="label">tCO₂e Avoided Annually</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="value">3.7</div>
-                        <div class="label">GWh Clean Energy/Year</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="value">277k</div>
-                        <div class="label">m³ of Fresh Water/Year</div>
-                    </div>
-                     <div class="kpi-card">
-                        <div class="value">>95%</div>
-                        <div class="label">System Uptime & Reliability</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="slide-6">
-            <div class="card">
-                <h2 class="text-center">A <span class="highlight">Bankable & Scalable</span> Financial Model</h2>
-                <p class="text-center" style="max-width: 800px; margin: 0 auto 3rem auto;">The project is structured for financial viability, utilizing long-term contracts with state utilities to guarantee revenue streams and de-risk private investment. Both entities demonstrate positive returns.</p>
-                <div class="two-column">
-                    <div>
-                        <h3>Renewable & Hydrogen Co. (RHC)</h3>
-                        <table>
-                            <tr><th>Metric</th><th>Value</th></tr>
-                            <tr><td>CAPEX</td><td>$3,961,000</td></tr>
-                            <tr><td>IRR</td><td>9.85%</td></tr>
-                            <tr><td>NPV (20-yr, 8% DR)</td><td>$438,938</td></tr>
-                             <tr><td>Payback Period</td><td>9.8 years</td></tr>
-                            <tr><td>Tariff to PLN</td><td>$0.13 / kWh</td></tr>
-                        </table>
-                    </div>
-                     <div>
-                        <h3>Flexible Water Co. (FWC)</h3>
-                        <table>
-                            <tr><th>Metric</th><th>Value</th></tr>
-                            <tr><td>CAPEX</td><td>$539,044</td></tr>
-                            <tr><td>IRR</td><td>11.2%</td></tr>
-                            <tr><td>NPV (20-yr, 8% DR)</td><td>$135,377</td></tr>
-                             <tr><td>Payback Period</td><td>7.4 years</td></tr>
-                            <tr><td>Tariff to PDAM</td><td>~$0.40 / m³</td></tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="slide-7">
-            <div class="card">
-                <h2 class="text-center">Phased <span class="highlight">Deployment Roadmap</span></h2>
-                <p class="text-center" style="max-width: 800px; margin: 0 auto 3rem auto;">Our development plan is structured in distinct phases to manage risk and ensure key milestones are met before scaling. Phase 0 and 1 focus on establishing the foundational infrastructure and contracts.</p>
-                <div class="placeholder">
-                     <p>PLACEHOLDER FOR<br>VISUAL TIMELINE INFOGRAPHIC</p>
-                </div>
-            </div>
-        </section>
-        <section id="slide-8">
-            <div class="card">
-                <h2 class="text-center">Comprehensive <span class="highlight">Risk Mitigation Strategy</span></h2>
-                <div class="kpi-container">
-                    <div class="kpi-card">
-                        <div class="value">📄</div>
-                        <div class="label">Contractual & Financial</div>
-                        <p>Long-term PPA/BLT contracts with state-owned utilities (PLN, PDAM) secure revenue. A blended finance model minimizes initial CAPEX risk.</p>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="value">🛠️</div>
-                        <div class="label">Technical & Operational</div>
-                        <p>Proven, modular technologies (FPV, SWRO) are used. Performance-based O&M contracts with technology suppliers guarantee uptime and efficiency.</p>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="value">🌍</div>
-                        <div class="label">Social & Environmental</div>
-                        <p>Community ownership models, including women-led cooperatives, ensure local buy-in. The project aligns with national decarbonization goals.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="slide-9">
-            <div class="card">
-                <h2 class="text-center">Empowering Communities, <span class="highlight">Ensuring Sustainability</span></h2>
-                <div class="two-column">
-                    <div>
-                        <h3>A Catalyst for Local Prosperity</h3>
-                        <p>This is more than an infrastructure project; it's a commitment to community resilience and inclusive growth.</p>
-                        <ul>
-                            <li><strong>Local Ownership:</strong> Women-led cooperatives are empowered to manage water distribution and participate in O&M, creating local jobs and value.</li>
-                            <li><strong>Improved Health & Livelihoods:</strong> Reliable access to clean water and affordable electricity improves health outcomes, supports local businesses, and enables new economic activities.</li>
-                             <li><strong>Gender Equity:</strong> Prioritizing women’s groups strengthens governance and ensures equitable benefit sharing.</li>
-                        </ul>
-                    </div>
-                    <div class="placeholder">
-                         <p>PLACEHOLDER FOR<br>VIBRANT COMMUNITY VISUAL</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="slide-10">
-            <div class="card text-center">
-                <h2>Join Us in <span class="highlight">Powering Indonesia's Future</span></h2>
-                <p>The Aruna Initiatives offer a de-risked, high-impact investment opportunity to pioneer a new, replicable model for sustainable island development.</p>
-                <div class="kpi-container" style="margin: 3rem auto;">
-                    <div class="kpi-card">
-                        <div class="value">$4.5M</div>
-                        <div class="label">Total Funding Ask (Blended Finance)</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="value">2,000+</div>
-                        <div class="label">Islands are Potential Replication Sites</div>
-                    </div>
-                </div>
-                <p class="tagline">Let's build a resilient, equitable, and prosperous blue economy, together.</p>
-            </div>
-        </section>
-    </main>
+            <p style="margin-top:10px">Team: <strong>Albert Rafael</strong> & <strong>Moch. Arizal</strong> — Universitas Airlangga</p>
+          </div>
+          <div class="card" style="background:linear-gradient(135deg,#dbeafe,#fae8ff); border-color:#e5e7eb">
+            <h3 class="c-indigo">Design Language</h3>
+            <p>Layered gradients + glass cards + color-coded KPIs for a modern, consultant-grade look. Use ← → or Space to navigate.</p>
+            <div class="pill"><span class="v c-purple">Navigation</span><span class="t">Keyboard & touch supported</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="navigation">
-        <button class="nav-button" onclick="navigate(-1)">&#8592; Prev</button>
-        <button class="nav-button" onclick="navigate(1)">Next &#8594;</button>
-    </div>
+    <!-- 1. WHY: Context & Evidence -->
+    <section id="s1">
+      <div class="container">
+        <div class="grid g-2">
+          <div class="card">
+            <h2 class="c-blue">WHY: Diesel Dependency & Water Insecurity</h2>
+            <p>In 2024, PLN operated ~<strong>5,200</strong> diesel units over <strong>2,130</strong> sites. CEPC ranges <strong>2–30×</strong> the grid tariff (IDR 3,000–50,000/kWh vs IDR 1,444/kWh), emitting ~<strong>3 MtCO₂/yr</strong>. Gili Ketapang faces unreliable power and costly water imports.</p>
+            <div class="grid g-4" style="margin-top:8px">
+              <div class="metric"><div class="big c-blue">2–30×</div><div class="cap">Higher cost vs grid</div></div>
+              <div class="metric"><div class="big c-indigo">3 Mt</div><div class="cap">CO₂ per year</div></div>
+              <div class="metric"><div class="big c-emerald">2,160</div><div class="cap">kWh/m²/yr solar</div></div>
+              <div class="metric"><div class="big c-amber">13,000</div><div class="cap">People/km² density</div></div>
+            </div>
+            <div class="list">
+              <div class="li"><span class="dot" style="background:#2563eb"></span><p>Policy alignment: PLN “dedieselisasi” by 2030, PR 122/2022, RUPTL roadmap</p></div>
+              <div class="li"><span class="dot" style="background:#06b6d4"></span><p>Water: subsea pipeline outages; households rely on wells/boat water up to IDR 30,000/m³</p></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="c-indigo">Setting & Stakeholders</h3>
+            <p>Island: 9,412 residents, 2,200 fishers, rising marine tourism. Groups: 12 fisheries associations, 3 women’s co-ops, 2 credit unions. Early PLN HFCG pilot (80 kW) in 2025 proves feasibility.</p>
+            <div class="pill"><span class="v c-indigo">PLN</span><span class="t">Offtaker (power & H₂ infra)</span></div>
+            <div class="pill"><span class="v c-purple">PDAM</span><span class="t">Offtaker (water BLT)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div id="progress-bar"></div>
+    <!-- 2. HOW: Dual-Entity Architecture -->
+    <section id="s2">
+      <div class="container">
+        <div class="grid g-2">
+          <div class="card">
+            <h2 class="c-indigo">HOW: Renewable & Hydrogen Co. (RHC)</h2>
+            <p><strong>Assets:</strong> 2 MWp FPV, 900 kW PEM, 176 kW HFCG, 300‑bar storage. <strong>Model:</strong> IPP/PPA + IaaS + performance O&M; asset handover post-term. <strong>Role:</strong> sell power to PLN, lease H₂ infrastructure, ensure reliability.</p>
+            <div class="grid g-4" style="margin-top:8px">
+              <div class="metric"><div class="big c-indigo">58%</div><div class="cap">Night load via H₂</div></div>
+              <div class="metric"><div class="big c-emerald">PR 86%</div><div class="cap">PV performance</div></div>
+              <div class="metric"><div class="big c-blue">3.71 GWh</div><div class="cap">AC output / yr</div></div>
+              <div class="metric"><div class="big c-cyan">45 t</div><div class="cap">H₂ / yr</div></div>
+            </div>
+            <div class="list">
+              <div class="li"><span class="dot" style="background:#6366f1"></span><p>Tariff: USD 0.13/kWh (PPA). Uptime ≥95% through O&M SLAs and OEM warranties</p></div>
+            </div>
+          </div>
+          <div class="card">
+            <h2 class="c-purple">HOW: Flexible Water Co. (FWC)</h2>
+            <p><strong>Assets:</strong> 800 m³/day modular SWRO + WHR. <strong>Model:</strong> BLT with PDAM + O&M. <strong>Output:</strong> 277,400 m³/year potable; ultrapure for H₂ as required; product salinity ≤500 mg/L.</p>
+            <div class="grid g-4" style="margin-top:8px">
+              <div class="metric"><div class="big c-purple">55%</div><div class="cap">Recovery ratio</div></div>
+              <div class="metric"><div class="big c-emerald">3.19</div><div class="cap">kWh/m³ (with WHR)</div></div>
+              <div class="metric"><div class="big c-cyan">277k</div><div class="cap">m³ water / yr</div></div>
+              <div class="metric"><div class="big c-amber">≤500</div><div class="cap">mg/L salinity</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script>
-        const main = document.querySelector('main');
-        const progressBar = document.getElementById('progress-bar');
-        let currentSlide = 0;
-        const totalSlides = 10;
+    <!-- 3. WHAT: KPIs & Impact -->
+    <section id="s3">
+      <div class="container">
+        <div class="grid g-3">
+          <div class="card">
+            <h2 class="c-emerald">Technical KPIs</h2>
+            <div class="grid g-4">
+              <div class="metric"><div class="big c-emerald">3.71 GWh</div><div class="cap">PV AC/year</div></div>
+              <div class="metric"><div class="big c-blue">45 t</div><div class="cap">H₂/year</div></div>
+              <div class="metric"><div class="big c-purple">277k m³</div><div class="cap">Water/year</div></div>
+              <div class="metric"><div class="big c-rose">4,365 t</div><div class="cap">CO₂e avoided/yr</div></div>
+            </div>
+            <div class="list"><div class="li"><span class="dot" style="background:#10b981"></span><p>Uptime ≥95%; 58% night coverage by HFCG; specific yield 1,857 kWh/kWp/yr</p></div></div>
+          </div>
+          <div class="card">
+            <h2 class="c-blue">Financial KPIs</h2>
+            <div class="grid g-4">
+              <div class="metric"><div class="big c-blue">$4.5M</div><div class="cap">Total CAPEX</div></div>
+              <div class="metric"><div class="big c-emerald">10.2%</div><div class="cap">Blended IRR</div></div>
+              <div class="metric"><div class="big c-indigo">$574k</div><div class="cap">Combined NPV</div></div>
+              <div class="metric"><div class="big c-amber">~8.6y</div><div class="cap">Avg payback</div></div>
+            </div>
+            <div class="list">
+              <div class="li"><span class="dot" style="background:#2563eb"></span><p>RHC: CAPEX $3.96M, IRR 9.85%, NPV $438,938, payback 9.8y</p></div>
+              <div class="li"><span class="dot" style="background:#8b5cf6"></span><p>FWC: CAPEX $539k, IRR 11.2%, NPV $135,377, payback 7.4y</p></div>
+            </div>
+          </div>
+          <div class="card">
+            <h2 class="c-rose">Social & ESG</h2>
+            <div class="grid g-4">
+              <div class="metric"><div class="big c-rose">Women</div><div class="cap">Co-ops led model</div></div>
+              <div class="metric"><div class="big c-emerald">Health</div><div class="cap">Clean water benefits</div></div>
+              <div class="metric"><div class="big c-cyan">Jobs 15+</div><div class="cap">Direct local roles</div></div>
+              <div class="metric"><div class="big c-blue">Carbon</div><div class="cap">Monetization upside</div></div>
+            </div>
+            <div class="list"><div class="li"><span class="dot" style="background:#f43f5e"></span><p>Transparent governance; value capture retained locally via co-ops</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        function navigate(direction) {
-            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-            main.scrollTo({
-                left: currentSlide * window.innerWidth,
-                behavior: 'smooth'
-            });
-        }
+    <!-- 4. Business Model Canvas (compact) -->
+    <section id="s4">
+      <div class="container">
+        <div class="card">
+          <h2 class="c-indigo">Business Model Essentials</h2>
+          <div class="grid g-4">
+            <div class="metric"><div class="big c-indigo">Partners</div><div class="cap">PLN, PDAM, OEMs, Local Gov</div></div>
+            <div class="metric"><div class="big c-blue">Activities</div><div class="cap">EPC, O&M, leasing, compliance</div></div>
+            <div class="metric"><div class="big c-emerald">Value</div><div class="cap">Bankable power & water</div></div>
+            <div class="metric"><div class="big c-purple">Segments</div><div class="cap">PLN, PDAM, community</div></div>
+          </div>
+          <div class="grid g-4" style="margin-top:8px">
+            <div class="metric"><div class="big c-amber">Channels</div><div class="cap">Direct B2B (PPA/BLT/IaaS)</div></div>
+            <div class="metric"><div class="big c-cyan">Costs</div><div class="cap">CAPEX, O&M, financing</div></div>
+            <div class="metric"><div class="big c-rose">Revenues</div><div class="cap">PPA, BLT, IaaS, carbon</div></div>
+            <div class="metric"><div class="big c-indigo">Moat</div><div class="cap">Integration + governance</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        main.addEventListener('scroll', () => {
-            const scrollPercentage = main.scrollLeft / (main.scrollWidth - main.clientWidth);
-            progressBar.style.width = `${scrollPercentage * 100}%`;
-        });
-    </script>
+    <!-- 5. Roadmap & Risks -->
+    <section id="s5">
+      <div class="container">
+        <div class="grid g-2">
+          <div class="card">
+            <h2 class="c-amber">Roadmap (24 Months)</h2>
+            <p><strong>0–6m:</strong> PPA/BLT, ESIA, financing, stakeholder onboarding. <strong>7–18m:</strong> FPV, PEM, HFCG, SWRO EPC + integration. <strong>19–24m:</strong> Commissioning, performance testing, O&M training, COD, replication setup.</p>
+            <div class="pill"><span class="v c-amber">T+24</span><span class="t">COD Target</span></div>
+          </div>
+          <div class="card">
+            <h2 class="c-rose">Risk Controls</h2>
+            <p>Tech reliability → OEM warranties & SLAs; tariff risk → gov-backed terms; social risk → women-led cooperatives & transparent governance; cost overrun → contingency + modular EPC; pipeline/fuel risk → local storage & redundancy.</p>
+            <div class="pill"><span class="v c-rose">>95%</span><span class="t">Availability target</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Scalability & Policy Fit -->
+    <section id="s6">
+      <div class="container">
+        <div class="card">
+          <h2 class="c-cyan">Scalability & Policy Fit</h2>
+          <p>Standardized contracts, modular engineering, and community structures enable rapid replication across Indonesia’s remote islands, aligned with PLN’s dedieselisasi and national Net Zero targets.</p>
+          <div class="grid g-4" style="margin-top:8px">
+            <div class="metric"><div class="big c-cyan">2,000+</div><div class="cap">Potential sites</div></div>
+            <div class="metric"><div class="big c-emerald">$10B+</div><div class="cap">Market size</div></div>
+            <div class="metric"><div class="big c-blue">3 Mt</div><div class="cap">CO₂ reduction</div></div>
+            <div class="metric"><div class="big c-indigo">30k+</div><div class="cap">Jobs potential</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Closing / CTA -->
+    <section id="s7">
+      <div class="container">
+        <div class="card">
+          <h2 class="c-indigo">Closing & Call to Action</h2>
+          <p>Seeking <strong>$4.5M</strong> blended finance to execute Phase 1 on Gili Ketapang and establish a national template. Partner with us to deliver reliable energy and water while driving measurable ESG outcomes.</p>
+          <div class="grid g-4" style="margin-top:8px">
+            <div class="metric"><div class="big c-indigo">Bankable</div><div class="cap">PPA • BLT • IaaS</div></div>
+            <div class="metric"><div class="big c-emerald">10.2%</div><div class="cap">Portfolio IRR</div></div>
+            <div class="metric"><div class="big c-blue">Replicable</div><div class="cap">Standardized contracts</div></div>
+            <div class="metric"><div class="big c-purple">Inclusive</div><div class="cap">Women-led co-ops</div></div>
+          </div>
+          <p style="margin-top:10px">Contact: <strong>Albert Rafael</strong> — albertrafaelaja@gmail.com</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="nav">
+    <button class="btn" onclick="nav(-1)">Prev</button>
+    <button class="btn" onclick="nav(1)">Next</button>
+  </div>
+  <div class="badge"><span id="count">1</span> / 8</div>
+
+  <script>
+    const main = document.querySelector('main');
+    const count = document.getElementById('count');
+    let i = 0, total = 8;
+    function nav(d){ i = Math.max(0, Math.min(total-1, i + d)); main.scrollTo({left: i * innerWidth, behavior:'smooth'}); count.textContent = i+1; }
+    main.addEventListener('scroll', () => { const n = Math.round(main.scrollLeft / innerWidth); if(n!==i){ i=n; count.textContent = i+1; }});
+    document.addEventListener('keydown', e => { if(e.key==='ArrowRight' || e.key===' ') nav(1); if(e.key==='ArrowLeft') nav(-1); if(e.key==='Home'){ i=0; nav(0);} if(e.key==='End'){ i=total-1; nav(0);} });
+  </script>
 </body>
 </html>
