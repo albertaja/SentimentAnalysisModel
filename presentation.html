@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aruna Initiatives Presentation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            scroll-behavior: smooth;
+        }
+
+        main {
+            display: flex;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        section {
+            flex: 0 0 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem 3rem;
+            margin: 1rem;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 0.5em;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #000;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #777;
+            margin-top: 1rem;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Specific slide styles for visual distinction */
+        #slide-1 {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+        }
+
+        #slide-1 h1, #slide-1 p {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .kpi-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .kpi-card {
+            background: #f0f4ff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            flex: 1;
+            text-align: center;
+            border: 1px solid #d9e2ff;
+        }
+
+        .kpi-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0052ff;
+        }
+
+        .kpi-card .label {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section id="slide-1">
+            <div class="card">
+                <h1>The Aruna Initiatives</h1>
+                <p class="tagline">A Bankable Framework for Community-Based Electrification and Indonesia's Blue Economy</p>
+                <p style="margin-top: 2rem;"><strong>Team:</strong> Albert Rafael & Moch. Arizal, Universitas Airlangga</p>
+            </div>
+        </section>
+        <section id="slide-2">
+            <div class="card">
+                <h2>WHY: The Challenge & Opportunity</h2>
+                <p>Indonesia's small islands are trapped in a cycle of expensive, polluting diesel power, costing up to 30 times the national average and hindering development. Gili Ketapang, a densely populated island, is a prime example of this challenge, facing both energy and water insecurity.</p>
+                <p>The government's "dedieselisasi" program and the island's high solar potential create a unique opportunity to build a replicable model for a sustainable transition.</p>
+            </div>
+        </section>
+        <section id="slide-3">
+            <div class="card">
+                <h2>HOW: A Unique Dual-Entity Framework</h2>
+                <p>We de-risk investment and maximize value through two synergistic companies:</p>
+                <p><strong>1. Renewable & Hydrogen Co. (RHC):</strong> An IPP that develops Floating PV and Hydrogen infrastructure, selling power to the state utility (PLN) under long-term, bankable contracts (PPA & IaaS).</p>
+                <p><strong>2. Flexible Water Co. (FWC):</strong> Develops modular desalination plants powered by renewables, selling water to the regional utility (PDAM) through a Build-Lease-Transfer (BLT) model.</p>
+            </div>
+        </section>
+        <section id="slide-4">
+            <div class="card">
+                <h2>WHAT: The Integrated Solution</h2>
+                <p>A resilient, island-wide system combining a <strong>2 MWp Floating PV</strong> plant with a <strong>900 kW electrolyzer</strong> to produce green hydrogen. This hydrogen supplies a <strong>176 kW Fuel-Cell Generator</strong> for reliable nighttime power, all managed through performance-based contracts.</p>
+                <p style="margin-top: 1rem;">PLACE IMAGE HERE – System Architecture Diagram</p>
+            </div>
+        </section>
+        <section id="slide-5">
+            <div class="card">
+                <h2>Impact Highlights 📈</h2>
+                <div class="kpi-container">
+                    <div class="kpi-card">
+                        <div class="value">>4,120</div>
+                        <div class="label">tCO₂e Avoided Annually</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">3.7M</div>
+                        <div class="label">kWh Generated Annually</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">277k</div>
+                        <div class="label">m³ of Clean Water/Year</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">15+</div>
+                        <div class="label">Direct Jobs Created</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="slide-6">
+            <div class="card">
+                <h2>Financial & Scaling Model 💰</h2>
+                <div class="kpi-container">
+                    <div class="kpi-card">
+                        <div class="value">9.85%</div>
+                        <div class="label">IRR (RHC)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">11.2%</div>
+                        <div class="label">IRR (FWC)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">$439k</div>
+                        <div class="label">NPV (RHC)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">9.8 yrs</div>
+                        <div class="label">Payback (RHC)</div>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem;">Our modular design allows for phased implementation. An initial investment of **$250 million** can fund the first phase of Floating PV and SWRO, establishing the core infrastructure and generating immediate returns.</p>
+                <p>PLACEHOLDER FOR FINANCIAL MODEL CHART</p>
+            </div>
+        </section>
+        <section id="slide-7">
+            <div class="card">
+                <h2>Phase 0–1 Timeline 🗺️</h2>
+                <p>PLACEHOLDER FOR TIMELINE INFOGRAPHIC</p>
+                <p>Our roadmap includes key milestones such as securing PPA/BLT contracts, completing environmental impact assessments, and achieving financial close within the first 12 months. Construction and commissioning are planned for months 12-24, with full operation by the end of Year 2.</p>
+            </div>
+        </section>
+        <section id="slide-8">
+            <div class="card">
+                <h2>Risk & Mitigation 🛡️</h2>
+                <div class="kpi-container">
+                    <div class="kpi-card">
+                        <div class="value">Technical</div>
+                        <div class="label">Mitigation: Performance-based O&M contracts</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">Social</div>
+                        <div class="label">Mitigation: Community ownership and women's co-ops</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">Regulatory</div>
+                        <div class="label">Mitigation: Strong alignment with government programs</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="slide-9">
+            <div class="card">
+                <h2>Community & Sustainability 💚</h2>
+                <p>This project is designed for and with the community. Women-led cooperatives will be established to manage water distribution and participate in O&M, ensuring local value capture and empowerment. This creates a sustainable, inclusive ecosystem that extends beyond energy and water.</p>
+                <p>PLACE IMAGE HERE – Community engagement visual</p>
+            </div>
+        </section>
+        <section id="slide-10">
+            <div class="card">
+                <h2>Closing & Call to Action 🚀</h2>
+                <p>The Aruna Initiatives offer a de-risked, high-impact investment opportunity to pioneer a new model for sustainable island development. We are seeking <strong>$4.5 million</strong> in blended finance to close the initial CAPEX and accelerate the transition to a resilient, blue economy.</p>
+                <p class="tagline">Join us in powering the future of Indonesia's islands.</p>
+            </div>
+        </section>
+    </main>
+
+    <div class="navigation">
+        <button class="nav-button" onclick="navigate(-1)">&#8592; Prev</button>
+        <button class="nav-button" onclick="navigate(1)">Next &#8594;</button>
+    </div>
+
+    <script>
+        const main = document.querySelector('main');
+        let currentSlide = 0;
+        const totalSlides = 10;
+
+        function navigate(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            main.scrollTo({
+                left: currentSlide * window.innerWidth,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
