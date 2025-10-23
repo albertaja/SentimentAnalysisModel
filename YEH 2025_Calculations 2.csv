@@ -1,0 +1,165 @@
+Section 1: Technical Calculations;;;;;;;;;;;;;;;;;;;;;;;;;;
+Variable;Parameter;Value;Unit;Notes;;;;;;;;;;;;;;;;;;;;;;
+SWROC;SWRO Installed Capacity (Nominal); 800,00 ;m3/day;Target average daily output for population/industry;;;;;;;;;;;;;;;;;;;;;;
+OPSR;Operational Schedule Ratio (avail.);95%;percent;Uptime after maintenance/downtime;;;;;;;;;;;;;;;;;;;;;;
+SWROP;SWRO Output per Year; 277.400,00 ;m3/year;SWROC x OPSR x 365;;;;;;;;;;;;;;;;;;;;;;
+FEEDR;Feedwater Intake Requirement; 1.454,55 ;m3/day;Typical recovery 55 percent (RO ratio);;;;;;;;;;;;;;;;;;;;;;
+ENE;SWRO Specific Energy Consumption; 3,17 ;kWh/m3;Conservative, with WHR effect (~5% less than baseline);;;;;;;;;;;;;;;;;;;;;;
+ENEBASE;Baseline SWRO SEC (no WHR); 3,40 ;kWh/m3;Reference for efficiency comparison;;;;;;;;;;;;;;;;;;;;;;
+ENEYEAR;Annual Energy Use; 880.319,79 ;kWh/year;SWRO Output x ENE;;;;;;;;;;;;;;;;;;;;;;
+WHRU;WHR Utilization Temperature Gain; 2,22 ;Celsius;From HFCG, annual-averaged;;;;;;;;;;;;;;;;;;;;;;
+PRSWRO;SWRO Plant Recovery Ratio;55%;percent;Feedwater converted to product water;;;;;;;;;;;;;;;;;;;;;;
+FWI;Feedwater Salinity Input; 38.000,00 ;mg/L;Sea/brackish water (East Java islands);;;;;;;;;;;;;;;;;;;;;;
+PROD;Product Water Salinity (output); 500,00 ;mg/L;Meets PDAM potable standards;;;;;;;;;;;;;;;;;;;;;;
+MEMB;Membrane Type; SWRO Polyamide ;-;High-rejection, industry standard;;;;;;;;;;;;;;;;;;;;;;
+MEMBLIFE;Membrane Life Span; 6,00 ;years;Typical, with cleaning;;;;;;;;;;;;;;;;;;;;;;
+CHEM;Chemical Consumption; 2,50 ;g/m3;Antiscalants/cleaning per m3 output;;;;;;;;;;;;;;;;;;;;;;
+CHEMYEAR;Annual Chemical Use; 693,50 ;kg/year;CHEM x SWRO Output;;;;;;;;;;;;;;;;;;;;;;
+REPL;Major Replacements Interval; 6,00 ;years;Membrane/pump replacement;;;;;;;;;;;;;;;;;;;;;;
+STAFF;Staffing Requirement; 8,00 ;FTE;O&M and monitoring;;;;;;;;;;;;;;;;;;;;;;
+TANK;Product Water Storage; 250,00 ;m3;Buffer stock for downtime/peak hours;;;;;;;;;;;;;;;;;;;;;;
+PIPE;Distribution Pipe Output (Main Island); 1.000,00 ;m;To PDAM tie-in;;;;;;;;;;;;;;;;;;;;;;
+SITE;Siting Elevation; 2,00 ;m;Near coastline, WHR access;;;;;;;;;;;;;;;;;;;;;;
+GRID;Electricity Source; PLN ;-;Tariff per hackathon scenario;;;;;;;;;;;;;;;;;;;;;;
+EMI;Emissions Factor (electricity); 0,95 ;tCO2/MWh;PLN standard reference;;;;;;;;;;;;;;;;;;;;;;
+REUSED;Brine Reuse Potential;10%;percent;For ice/fish pond pilot use;;;;;;;;;;;;;;;;;;;;;;
+PLN;PLN Electricity Cost; $0,09 ;USD/kWh;;;;;;;;;;;;;;;;;;;;;;;
+CONV;USD to IDR; Rp16.770,00 ;IDR;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+Section 2: Clean Water Production and Storage Calculations;;;;;;;;;;;;;;;;;;;;;;;;;;
+Variable;Parameter Description;Value;Unit;Calculation Formula / Reference;;;;;;;;;;;;;;;;;;;;;;
+SWROP;SWRO Output per Year; 277.400,00 ;m3/year;SWROC _ OPSR _ 365;;;;;;;;;;;;;;;;;;;;;;
+ENEYEAR;Annual Energy Use; 880.319,79 ;kWh/year;SWROP _ ENE;;;;;;;;;;;;;;;;;;;;;;
+FEEDR;Feedwater Intake Requirement (daily); 1.454,55 ;m3/day;SWROC / PRSWRO _ 100;;;;;;;;;;;;;;;;;;;;;;
+FEEDYEAR;Annual Feedwater Requirement; 504.363,64 ;m3/year;FEEDR _ OPSR _ 365;;;;;;;;;;;;;;;;;;;;;;
+CHEMYEAR;Annual Chemical Use; 693,50 ;kg/year;CHEM _ SWROP;;;;;;;;;;;;;;;;;;;;;;
+CHEMCOST;Annual Chemical Cost; 827,07 ;USD/year;CHEMYEAR _ 20.000 idr/kg;;;;;;;;;;;;;;;;;;;;;;
+MEMBRAIN;Number of Membrane Units;16;unit;Based on SWROC, manufacturer design (insert after design);;;;;;;;;;;;;;;;;;;;;;
+MEMBREP;Annual Membrane Replacement Cost; $2.385,21 ;USD/year;(MEMBLIFE Ö 365) _ 15.000.000 IDR _ MEMBRAIN;;;;;;;;;;;;;;;;;;;;;;
+OPEXTOTAL;Total Annual OPEX (est.); $171.647,98 ;IDR/year;Energy cost + CHEMCOST + MEMBREP + labor + other;;;;;;;;;;;;;;;;;;;;;;
+ENECOST;Annual Electricity Cost; $79.228,78 ;USD/year;ENEYEAR _ electricity tariff (see GRID/PLN price);;;;;;;;;;;;;;;;;;;;;;
+LABCOST;Annual Labor Cost; $89.206,92 ;USD/year;STAFF _ average salary _ 12;;;;;;;;;;;;;;;;;;;;;;
+PRODUCT;Product Water Delivered (daily);800;m3/day;SWROC;;;;;;;;;;;;;;;;;;;;;;
+WHRSAVE;Energy Saved by WHR;66.148;kWh/year;(ENEBASE _ ENE) _ SWROP;;;;;;;;;;;;;;;;;;;;;;
+WHRMONEY;Money Saved by WHR; $5.953,28 ;IDR/year;WHRSAVE _ electricity tariff;;;;;;;;;;;;;;;;;;;;;;
+BRIYIELD;Brine Output per Day; 654,55 ;m3/day;FEEDR _ SWROC;;;;;;;;;;;;;;;;;;;;;;
+BRIYEAR;Brine Output per Year; 226.963,64 ;m3/year;BRIYIELD _ OPSR _ 365;;;;;;;;;;;;;;;;;;;;;;
+REUWAR;Brine Reused per Year; 22.696,36 ;m3/year;BRIYEAR _ REUSED Ö 100;;;;;;;;;;;;;;;;;;;;;;
+CAPINIT;Initial CAPEX Estimate; $1.900.000,00 ;IDR/unit;Construction + equipment + buffer tanks + installation;;;;;;;;;;;;;;;;;;;;;;
+MAJREP;Major Replacement CAPEX (every 6 yr); $36.000,00 ;USD/6 years;For membranes, HP pumps, relayed as CAPEX in year n;;;;;;;;;;;;;;;;;;;;;;
+CARBcUT;Annual CO2 Saving (grid offset);836,30;tCO2/year;ENEYEAR _ EMI Ö 1000;;;;;;;;;;;;;;;;;;;;;;
+TANKBUFF;Buffer Storage Days;0,3125;day;TANK Ö SWROC;;;;;;;;;;;;;;;;;;;;;;
+SALLARY;Staff Salary for Chem Treatment; Rp187.000.000,00 ;IDR/year;;;;;;;;;;;;;;;;;;;;;;;
+;OPEX Inflation per year;2,5%;per year;;;;;;;;;;;;;;;;;;;;;;;
+;Rate for BLT;16%;;;;;;;;;;;;;;;;;;;;;;;;
+;Service Fee for SWRO (% of CAPEX);4,00%;;;;;;;;;;;;;;;;;;;;;;;;
+;Asset Lifetime;20;years;;;;;;;;;;;;;;;;;;;;;;;
+;Loan Percentage (% of CAPEX);30%;;;;;;;;;;;;;;;;;;;;;;;;
+;Loan Amount (USD); $161.713,13 ;USD;;;;;;;;;;;;;;;;;;;;;;;
+;Loan Interest (%);7%;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+Section 3: Efficiency Gain from Intergration of WHR;;;;;;;;;;;;;;;;;;;;;;;;;;
+Variable;Parameter Description;Value;Unit;Calculation Formula / Reference;;;;;;;;;;;;;;;;;;;;;;
+HPD;Hydrogen Produced per Day; 123,97 ;kg/day;From electrolyzer/HFCG calculations;;;;;;;;;;;;;;;;;;;;;;
+HFCG_EFF;HFCG Electrical Efficiency;0,5;-;Input efficiency of fuel cell generator;;;;;;;;;;;;;;;;;;;;;;
+H_H2;LHV of H_;33,33;kWh/kg;Lower Heating Value of H_;;;;;;;;;;;;;;;;;;;;;;
+HFCGO;HFCG Output (electrical);2.065,94;kWh/day;HPD _ H_H2 _ HFCG_EFF;;;;;;;;;;;;;;;;;;;;;;
+HFCG_HEAT;Waste Heat Generated per Day;2.065,94;kWh/day;HPD _ H_H2 _ (1 _ HFCG_EFF);;;;;;;;;;;;;;;;;;;;;;
+WATERMASS;Water to be pre-heated (SWRO feed);800.000;kg/day;SWROC _ 1.000 (density, 1 m_ = 1.000 kg);;;;;;;;;;;;;;;;;;;;;;
+C_WATER;Specific Heat of Water;4,186;kJ/kgá¡C;Use for temp rise calculation;;;;;;;;;;;;;;;;;;;;;;
+H_HEAT;Waste Heat in kJ/day;7.437.384;kJ/day;HFCG_HEAT _ 3.6 (kWh to kJ);;;;;;;;;;;;;;;;;;;;;;
+DELTAT;Temp. Rise in Preheated Feedwater;2,220910217;¡C;H_HEAT / (WATERMASS _ C_WATER);;;;;;;;;;;;;;;;;;;;;;
+EFF_GAIN;SWRO Efficiency Gain per ¡C;3;%/¡C;Industry reference;;;;Total Cost for PDAM (USD);; $112.480,66 ;USD/year;;;;;;;;;;;;;;;
+PGAIN;Projected Efficiency Gain;6,663%;%;DELTAT _ EFF_GAIN;;;;Total Cost for PDAM (Rp);; Rp1.886.300.662,12 ;Rp/year;;;;;;;;;;;;;;;
+ENEBASE;Baseline SWRO SEC (no WHR);3,4;kWh/m_;Reference;;;;Production Cost/m3 (Rp/m3);; Rp6.799,93 ;Rp/m3;;;;;;;;;;;;;;;
+ENE_NEW;New SWRO SEC (with WHR); 3,173 ;kWh/m_;ENEBASE _ (1 _ PGAIN / 100);;;;;;;;;;;;;;;;;;;;;;
+E_SAVE;Daily Energy Saved;181,23;kWh/day;(ENEBASE _ ENE_NEW) _ SWROC;;;;;;;;;;;;;;;;;;;;;;
+ANNUAL_SAVE;Annual Energy Saved;66.147,59;kWh/year;E_SAVE _ 365;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+Section 3: Financial Model & Cashflow ;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;Year;;;;;;;;;;;;;;;;;;;;
+No.;Description;;;;;0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20
+1;REVENUE;;;;;;;;;;;;;;;;;;;;;;;;;
+;Lease/BLT Payment from PDAM;;;;;; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 ; $90.918,91 
+;O&M Service Fee;;;;;; $21.561,75 ; $22.100,79 ; $22.653,31 ; $23.219,65 ; $23.800,14 ; $24.395,14 ; $25.005,02 ; $25.630,15 ; $26.270,90 ; $26.927,67 ; $27.600,86 ; $28.290,88 ; $28.998,16 ; $29.723,11 ; $30.466,19 ; $31.227,84 ; $32.008,54 ; $32.808,75 ; $33.628,97 ; $34.469,70 
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Total Revenue;;;;;; $112.480,66 ; $113.019,70 ; $113.572,22 ; $114.138,56 ; $114.719,05 ; $115.314,05 ; $115.923,93 ; $116.549,05 ; $117.189,81 ; $117.846,58 ; $118.519,77 ; $119.209,79 ; $119.917,07 ; $120.642,02 ; $121.385,10 ; $122.146,75 ; $122.927,45 ; $123.727,66 ; $124.547,88 ; $125.388,61 
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+2;CAPITAL EXPENDITURE (CAPEX);;;;;;;;;;;;;;;;;;;;;;;;;
+;SWRO EPC & Installation;;;;; $(400.000,00);;;;;;;;;;;;;;;;;;;;
+;Balance of Plant (site, pipeline, tanks);;;;; $(60.000,00);;;;;;;;;;;;;;;;;;;;
+;Land/Sea Lease and Permitting;;;;; $(2.500,00);;;;;;;;;;;;;;;;;;;;
+;Other CAPEX;;;;; $(23.125,00);;;;;;;;;;;;;;;;;;;;
+;Tax for CAPEX (PPn 11%);;;;; $(53.418,75);;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Total CAPEX;;;;; $(539.043,75);;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+3;OPERATING EXPENDITURE (OPEX);;;;;;;;;;;;;;;;;;;;;;;;;
+;Annual O&M Service Cost;;;;;; $(5.390,44); $(5.525,20); $(5.663,33); $(5.804,91); $(5.950,03); $(6.098,79); $(6.251,25); $(6.407,54); $(6.567,72); $(6.731,92); $(6.900,22); $(7.072,72); $(7.249,54); $(7.430,78); $(7.616,55); $(7.806,96); $(8.002,13); $(8.202,19); $(8.407,24); $(8.617,42)
+;Insurance/Security/Asset Management;;;;;; $(1.078,09); $(1.105,04); $(1.132,67); $(1.160,98); $(1.190,01); $(1.219,76); $(1.250,25); $(1.281,51); $(1.313,54); $(1.346,38); $(1.380,04); $(1.414,54); $(1.449,91); $(1.486,16); $(1.523,31); $(1.561,39); $(1.600,43); $(1.640,44); $(1.681,45); $(1.723,48)
+;Warranty Reserves or Performance Guarantee;;;;;; $(5.390,44); $(5.525,20); $(5.663,33); $(5.804,91); $(5.950,03); $(6.098,79); $(6.251,25); $(6.407,54); $(6.567,72); $(6.731,92); $(6.900,22); $(7.072,72); $(7.249,54); $(7.430,78); $(7.616,55); $(7.806,96); $(8.002,13); $(8.202,19); $(8.407,24); $(8.617,42)
+;Major Replacement/Refurbishment;;;;;;;;;;;; $(36.000,00);;;;;;; $(42.792,69);;;;;;
+;Admin/Legal Compliance;;;;;; $(1.078,09); $(1.105,04); $(1.132,67); $(1.160,98); $(1.190,01); $(1.219,76); $(1.250,25); $(1.281,51); $(1.313,54); $(1.346,38); $(1.380,04); $(1.414,54); $(1.449,91); $(1.486,16); $(1.523,31); $(1.561,39); $(1.600,43); $(1.640,44); $(1.681,45); $(1.723,48)
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Total OPEX;;;;;; $(12.937,05); $(13.260,48); $(13.591,99); $(13.931,79); $(14.280,08); $(14.637,08); $(51.003,01); $(15.378,09); $(15.762,54); $(16.156,60); $(16.560,52); $(16.974,53); $(17.398,89); $(60.626,55); $(18.279,71); $(18.736,71); $(19.205,12); $(19.685,25); $(20.177,38); $(20.681,82)
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+4;Technical Production;;;;;;;;;;;;;;;;;;;;;;;;;
+;Water output (m3);;;;;; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 ; 277.400,0 
+;Brine output (m3);;;;;; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 ; 226.963,6 
+;Annual CO2 avoided;;;;;; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 ; 836,3 
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+4;EBITDA (Earnings before interest, tax, depreciation, amortization);;;;;;;;;;;;;;;;;;;;;;;;;
+;EBITDA;;;;;; $99.543,61 ; $99.759,23 ; $99.980,24 ; $100.206,77 ; $100.438,96 ; $100.676,97 ; $64.920,92 ; $101.170,97 ; $101.427,27 ; $101.689,98 ; $101.959,25 ; $102.235,26 ; $102.518,17 ; $60.015,47 ; $103.105,38 ; $103.410,05 ; $103.722,33 ; $104.042,41 ; $104.370,50 ; $104.706,79 
+;Depreciation & Amortization;;;;;; $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19); $(26.952,19)
+;EBIT (Earnings before interest and tax);;;;;; $72.591,42 ; $72.807,04 ; $73.028,05 ; $73.254,58 ; $73.486,78 ; $73.724,78 ; $37.968,73 ; $74.218,78 ; $74.475,08 ; $74.737,79 ; $75.007,07 ; $75.283,08 ; $75.565,98 ; $33.063,28 ; $76.153,20 ; $76.457,86 ; $76.770,14 ; $77.090,22 ; $77.418,31 ; $77.754,60 
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Opening Balance;;;;;; $161.713,13 ; $157.768,47 ; $153.547,69 ; $149.031,45 ; $144.199,08 ; $139.028,44 ; $133.495,85 ; $127.575,99 ; $121.241,73 ; $114.464,08 ; $107.211,99 ; $99.452,25 ; $91.149,33 ; $82.265,21 ; $72.759,20 ; $62.587,77 ; $51.704,34 ; $40.059,07 ; $27.598,63 ; $14.265,96 
+;Loan Repayment ;;;;;; $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57); $(15.264,57)
+;Interest;;;;;; $(11.319,92); $(11.043,79); $(10.748,34); $(10.432,20); $(10.093,94); $(9.731,99); $(9.344,71); $(8.930,32); $(8.486,92); $(8.012,49); $(7.504,84); $(6.961,66); $(6.380,45); $(5.758,56); $(5.093,14); $(4.381,14); $(3.619,30); $(2.804,13); $(1.931,90); $(998,62)
+;Principal;;;;;; $3.944,66 ; $4.220,78 ; $4.516,24 ; $4.832,37 ; $5.170,64 ; $5.532,58 ; $5.919,87 ; $6.334,26 ; $6.777,65 ; $7.252,09 ; $7.759,74 ; $8.302,92 ; $8.884,12 ; $9.506,01 ; $10.171,43 ; $10.883,43 ; $11.645,27 ; $12.460,44 ; $13.332,67 ; $14.265,96 
+;Closing Balance;;;;;; $157.768,47 ; $153.547,69 ; $149.031,45 ; $144.199,08 ; $139.028,44 ; $133.495,85 ; $127.575,99 ; $121.241,73 ; $114.464,08 ; $107.211,99 ; $99.452,25 ; $91.149,33 ; $82.265,21 ; $72.759,20 ; $62.587,77 ; $51.704,34 ; $40.059,07 ; $27.598,63 ; $14.265,96 ; $0,00 
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Tax;;;;;; $(13.479,73); $(13.587,91); $(13.701,54); $(13.820,92); $(13.946,43); $(14.078,41); $(6.297,28); $(14.363,46); $(14.517,40); $(14.679,57); $(14.850,49); $(15.030,71); $(15.220,82); $(6.007,04); $(15.633,21); $(15.856,88); $(16.093,18); $(16.342,94); $(16.607,01); $(16.886,32)
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+5;NET PROFIT;;;;; $(539.043,75); $47.791,77 ; $48.175,33 ; $48.578,17 ; $49.001,46 ; $49.446,42 ; $49.914,37 ; $22.326,74 ; $50.925,00 ; $51.470,77 ; $52.045,74 ; $52.651,74 ; $53.290,71 ; $53.964,71 ; $21.297,68 ; $55.426,84 ; $56.219,84 ; $57.057,65 ; $57.943,15 ; $58.879,40 ; $59.869,67 
+;Free Cash Flow to Equity (FCFE);;;;; $(539.043,75); $70.799,30 ; $70.906,74 ; $71.014,12 ; $71.121,27 ; $71.227,96 ; $71.333,98 ; $43.359,06 ; $71.542,93 ; $71.645,30 ; $71.745,84 ; $71.844,19 ; $71.939,98 ; $72.032,78 ; $38.743,85 ; $72.207,60 ; $72.288,59 ; $72.364,57 ; $72.434,90 ; $72.498,91 ; $72.555,90 
+;Accumulated Cash Flow;;;;; $(539.043,75); $(468.244,45); $(397.337,71); $(326.323,58); $(255.202,31); $(183.974,35); $(112.640,37); $(69.281,31); $2.261,62 ; $73.906,92 ; $145.652,75 ; $217.496,94 ; $289.436,92 ; $361.469,70 ; $400.213,55 ; $472.421,15 ; $544.709,75 ; $617.074,31 ; $689.509,21 ; $762.008,12 ; $834.564,02 
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+6;IRR;11,245%;;;;;;;;;;;;;;;;;;;;;;;;
+7;NPV; $135.377,22 ;USD;(with 8% of discount rate);;;;;;;;;;;;;;;;;;;;;;
+8;Payback Period;7,4;years;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;7,968387976;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;OPERATING EXPENDITURE (OPEX);;;;;;;;;;;;;;;;;;;;;;;;;
+;Electricity Cost;;;;;;;;;;;;;;;;;;;;;;;;;
+;Chemicals;;;;;;;;;;;;;;;;;;;;;;;;;
+;Membrane/HP Pump Minor Replacement;;;;;;;;;;;;;;;;;;;;;;;;;
+;Labor/Admin;;;;;;;;;;;;;;;;;;;;;;;;;
+;Insurance, Security;;;;;;;;;;;;;;;;;;;;;;;;;
+;Major Replacement (year 6/12);;;;;;;;;;;;;;;;;;;;;;;;;
+;O&M Fee (if paid to FWC);;;;;;;;;;;;;;;;;;;;;;;;;
+;Total OPEX;;;;;;;;;;;;;;;;;;;;;;;;;
